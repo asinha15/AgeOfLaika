@@ -26,8 +26,17 @@ class ViewController: UIViewController {
 
     @IBAction func convertHumanAgeToDogAgeButtonPressed(sender: UIButton) {
         let humanAge = humanAgeTextField.text.toInt()!
-        let conversionConstant = 7
-        let dogAge = humanAge * conversionConstant
+        let conversionConstantUpToTwoYears = 10.5
+        let conversionConstantUpAfterTwoYears = 4
+        var dogAge:Double
+        dogAge = 0.0
+        
+        if humanAge <= 2 {
+            dogAge = Double(humanAge) * conversionConstantUpToTwoYears
+        } else {
+            dogAge = (2 * conversionConstantUpToTwoYears) + Double(((humanAge - 2) * conversionConstantUpAfterTwoYears))
+        }
+    
         dogAgeLabel.hidden = false
         dogAgeLabel.text = "\(dogAge)" + " in dog years."
         humanAgeTextField.resignFirstResponder()
